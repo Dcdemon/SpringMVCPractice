@@ -3,13 +3,15 @@ package com.dcdemon.controller;
 import com.dcdemon.dto.User;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
-@Controller
+//@Controller
 @RequestMapping("hello")
+@RestController
 public class HelloController {
 
     @RequestMapping("/test1")
@@ -60,6 +62,25 @@ public class HelloController {
     public String registUser() {
         System.out.println("注册用户");
         return "redirect:/index.jsp";
+    }
+
+    @RequestMapping("/getUser")
+    //    @ResponseBody
+    public List<User> requestBodyTest(@RequestBody User u) {
+        User user1 = User.builder()
+                .id(1)
+                .name("名")
+                .date(new Date())
+                .build();
+        User user2 = User.builder()
+                .id(2)
+                .name("名2")
+                .date(new Date())
+                .build();
+        List users = new ArrayList();
+        users.add(user1);
+        users.add(user2);
+        return users;
     }
 
 }
